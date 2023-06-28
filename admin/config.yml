@@ -1,0 +1,817 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: ENVIO IMEDIATO COMPRA AUTOMATICA, key: -6dcb3bc5'
+            label: Text
+            name: '-6dcb3bc5'
+            widget: string
+          - hint: 'Original text: UMA , key: 27cc97'
+            label: Text
+            name: 27cc97
+            widget: string
+          - hint: 'Original text: TÉCNICA, key: -49a1c3b9'
+            label: Text
+            name: '-49a1c3b9'
+            widget: string
+          - hint: >-
+              Original text:  TOTALMENTE REPRODUZÍVEL para SE TORNAR UM , key:
+              -4cecbd5e
+            label: Text
+            name: '-4cecbd5e'
+            widget: string
+          - hint: 'Original text: PROFISSIONAL, key: 5dcc39a3'
+            label: Text
+            name: 5dcc39a3
+            widget: string
+          - hint: 'Original text:  DE , key: f939f'
+            label: Text
+            name: f939f
+            widget: string
+          - hint: 'Original text: SUCESSO , key: -4b44c3ab'
+            label: Text
+            name: '-4b44c3ab'
+            widget: string
+          - hint: 'Original text: COM DR EUGÊNIO., key: 54dd3460'
+            label: Text
+            name: 54dd3460
+            widget: string
+          - hint: 'Original text: 00, key: 600'
+            label: Text
+            name: '600'
+            widget: string
+          - hint: 'Original text: Horas, key: 42ac99d'
+            label: Text
+            name: 42ac99d
+            widget: string
+          - hint: 'Original text: Min, key: 12e32'
+            label: Text
+            name: '12e32'
+            widget: string
+          - hint: 'Original text: Seg, key: 14435'
+            label: Text
+            name: '14435'
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: >-
+              Original text: De acordo com as Leis 12.965/2014 e 13.709/2018,
+              que regulam o uso da Internet e o tratamento de dados pessoais no
+              Brasil, ao me inscrever, autorizo a Equipe da Academia Alta Renda
+              a me enviar notificações por e-mail ou outros meios, assim como
+              concordo com a sua Política de Privacidade., key: 26496698
+            label: Text
+            name: '26496698'
+            widget: text
+          - hint: >-
+              Original text: ACESSO ANTECIPADO AO CONTEÚDO PREMIUM, key:
+              5b4dc8cf
+            label: Text
+            name: 5b4dc8cf
+            widget: string
+          - hint: 'Original text: MODULO 1, key: aa1d907'
+            label: Text
+            name: aa1d907
+            widget: string
+          - hint: >-
+              Original text: Nesse módulo vote terá uma visão geral sobre resina
+              composta. Indicações das facetas de resina, materiais e
+              instrumentais utilizados na técnica ., key: 4c4cfdef
+            label: Text
+            name: 4c4cfdef
+            widget: text
+          - hint: 'Original text: MODULO 2, key: aa1d908'
+            label: Text
+            name: aa1d908
+            widget: string
+          - hint: >-
+              Original text: Nesse módulo você verá um hands onde como construir
+              os guias de silicone utilizados na técnica , bem como a execução
+              das facetas em modelos anatomico. , key: -7c16a46e
+            label: Text
+            name: '-7c16a46e'
+            widget: text
+          - hint: 'Original text: MODULO 3, key: aa1d909'
+            label: Text
+            name: aa1d909
+            widget: string
+          - hint: >-
+              Original text: No módulo 3 você poderá acompanhar a execução de um
+              caso clínico executado em um paciente modelo, desde a escolha de
+              cor ao polimento final. Tirando todas as dúvidas sobre a execução
+              da técnica !!!, key: 5b80fac
+            label: Text
+            name: 5b80fac
+            widget: text
+          - hint: 'Original text: COMPRE AGORA, key: -77f5fb46'
+            label: Text
+            name: '-77f5fb46'
+            widget: string
+          - hint: 'Original text: VÍDEO, key: 51a1d57'
+            label: Text
+            name: 51a1d57
+            widget: string
+          - hint: 'Original text: O QUE NOSSO CLIENTES DIZEM, key: -3a2d08a8'
+            label: Text
+            name: '-3a2d08a8'
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet consectetur. Ullamcorper
+              ut scelerisque sed eu tortor est tristique nunc. Quisque vivamus
+              euismod cras nibh in nisi. Habitant tincidunt sit facilisis
+              sodales dolor pretium ac. Aliquam habitasse mi facilisi auctor
+              pretium velit praesent egestas. Proin imperdiet cursus sit eget.
+              Est bibendum nibh consectetur enim integer aenean sed justo dolor.
+              Odio in convallis velit ut at egestas. Eget fusce., key: 1a90e6f1
+            label: Text
+            name: 1a90e6f1
+            widget: text
+          - hint: 'Original text: Dianne Russell, key: -161ff295'
+            label: Text
+            name: '-161ff295'
+            widget: string
+          - hint: 'Original text: Barone LLC., key: 6d136438'
+            label: Text
+            name: 6d136438
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet consectetur. In
+              dignissim neque tempus rhoncus odio facilisis eu eget dictum. Non
+              tellus aenean euismod pretium amet sit magna tristique fermentum.
+              Pretium eget tempus adipiscing in aliquam nisi in lectus. In risus
+              in vulputate interdum arcu egestas lacinia fames ligula. Hendrerit
+              viverra volutpat enim aliquam viverra egestas vitae eget mi. Arcu
+              velit commodo augue neque a. Morbi vitae., key: -658f97fd
+            label: Text
+            name: '-658f97fd'
+            widget: text
+          - hint: 'Original text: Jacob Jones, key: 760d9776'
+            label: Text
+            name: 760d9776
+            widget: string
+          - hint: 'Original text: Abstergo Ltd., key: -217db545'
+            label: Text
+            name: '-217db545'
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet consectetur. Lectus non
+              tellus neque nec amet ut gravida gravida. Fringilla in nulla sit
+              id vulputate. Habitasse odio est tortor vestibulum magnis id.
+              Ipsum id pellentesque risus quis massa ultrices. Varius nullam
+              pellentesque egestas urna. Diam sapien sed aliquam., key: 67d3d623
+            label: Text
+            name: 67d3d623
+            widget: text
+          - hint: 'Original text: Darrell Steward, key: 5f5f0e48'
+            label: Text
+            name: 5f5f0e48
+            widget: string
+          - hint: 'Original text: Binford Ltd., key: 5e217b30'
+            label: Text
+            name: 5e217b30
+            widget: string
+          - hint: 'Original text: minha trajetória, key: e1adac2'
+            label: Text
+            name: e1adac2
+            widget: string
+          - hint: 'Original text: Quando , key: -75f5d21c'
+            label: Text
+            name: '-75f5d21c'
+            widget: string
+          - hint: 'Original text: comecei, key: 38a242c3'
+            label: Text
+            name: 38a242c3
+            widget: string
+          - hint: 'Original text:  a trabalhar com, key: 13a97b11'
+            label: Text
+            name: 13a97b11
+            widget: string
+          - hint: 'Original text:  facetas de resina, key: -4035739c'
+            label: Text
+            name: '-4035739c'
+            widget: string
+          - hint: >-
+              Original text: , eu fazia a mão livre e cobrava cerca de 250 a 300
+              reais por faceta. , key: -15fc300d
+            label: Text
+            name: '-15fc300d'
+            widget: string
+          - hint: >-
+              Original text: Meu resultado não era tão bom e meu lucro também
+              não, sem contar que eu não atraia tantos, key: -21c00623
+            label: Text
+            name: '-21c00623'
+            widget: string
+          - hint: 'Original text:  paciente, key: -4acb0c6f'
+            label: Text
+            name: '-4acb0c6f'
+            widget: string
+          - hint: >-
+              Original text:  pois os casos não eram tão bonitos nem tinham um
+              padrão. , key: -3ef79cd1
+            label: Text
+            name: '-3ef79cd1'
+            widget: string
+          - hint: 'Original text: Sempre , key: -26ccaf68'
+            label: Text
+            name: '-26ccaf68'
+            widget: string
+          - hint: 'Original text: busquei, key: e536048'
+            label: Text
+            name: e536048
+            widget: string
+          - hint: 'Original text:  formas de , key: -50428b4b'
+            label: Text
+            name: '-50428b4b'
+            widget: string
+          - hint: 'Original text: aperfeiçoa-ló, key: -69b19637'
+            label: Text
+            name: '-69b19637'
+            widget: string
+          - hint: >-
+              Original text:  para poder ter casos mais bonitos e , key:
+              1745df19
+            label: Text
+            name: 1745df19
+            widget: string
+          - hint: 'Original text: atrair , key: -285d3ccb'
+            label: Text
+            name: '-285d3ccb'
+            widget: string
+          - hint: 'Original text: mais , key: 62db222'
+            label: Text
+            name: 62db222
+            widget: string
+          - hint: 'Original text: pacientes, key: 683b5b22'
+            label: Text
+            name: 683b5b22
+            widget: string
+          - hint: 'Original text:  para que no final das contas, , key: -b485474'
+            label: Text
+            name: '-b485474'
+            widget: string
+          - hint: 'Original text: faturasse, key: 3604627a'
+            label: Text
+            name: 3604627a
+            widget: string
+          - hint: >-
+              Original text:  mais no consultório. Hoje faturo cerca de, key:
+              41a2bfc2
+            label: Text
+            name: 41a2bfc2
+            widget: string
+          - hint: 'Original text:  1000 a 1200, key: -310b38ff'
+            label: Text
+            name: '-310b38ff'
+            widget: string
+          - hint: 'Original text:  por, key: 103e33'
+            label: Text
+            name: '103e33'
+            widget: string
+          - hint: 'Original text:  faceta, key: 505b29aa'
+            label: Text
+            name: 505b29aa
+            widget: string
+          - hint: 'Original text:  em meu , key: -690ec1c5'
+            label: Text
+            name: '-690ec1c5'
+            widget: string
+          - hint: 'Original text: consultório, key: -33d0aacf'
+            label: Text
+            name: '-33d0aacf'
+            widget: string
+          - hint: "Original text: , graças a um método que desenvolvi \_e padronizou os meus casos. E o que veio de brinde, foi um método totalmente reproduzível que independe somente de , key: -76c42159"
+            label: Text
+            name: '-76c42159'
+            widget: text
+          - hint: 'Original text: habilidades, key: 74470418'
+            label: Text
+            name: '74470418'
+            widget: string
+          - hint: >-
+              Original text:  de escultura.Deixando claro, não é , key:
+              -4e08c661
+            label: Text
+            name: '-4e08c661'
+            widget: string
+          - hint: 'Original text: técnica, key: -746d4f99'
+            label: Text
+            name: '-746d4f99'
+            widget: string
+          - hint: 'Original text:  de injeção! , key: 2cceec93'
+            label: Text
+            name: 2cceec93
+            widget: string
+          - hint: 'Original text: Ou seja, não utilizo resina flow. , key: 3a949d43'
+            label: Text
+            name: 3a949d43
+            widget: string
+          - hint: 'Original text: Não, key: 140ba'
+            label: Text
+            name: 140ba
+            widget: string
+          - hint: 'Original text:  é , key: 9477'
+            label: Text
+            name: '9477'
+            widget: string
+          - hint: 'Original text:  de resinas , key: -b9a3518'
+            label: Text
+            name: '-b9a3518'
+            widget: string
+          - hint: 'Original text: termocompactadas!, key: 2c5e36ec'
+            label: Text
+            name: 2c5e36ec
+            widget: string
+          - hint: 'Original text: ‍, key: 200d'
+            label: Text
+            name: 200d
+            widget: string
+          - hint: >-
+              Original text: Ou seja, não esquento as resinas para manipulação.
+              Uso resinas na sua consistência normal. Estelite e , key:
+              -6d153f1d
+            label: Text
+            name: '-6d153f1d'
+            widget: text
+          - hint: 'Original text: emprees, key: -60cac117'
+            label: Text
+            name: '-60cac117'
+            widget: string
+          - hint: 'Original text:  direct na sua , key: 7b1f0af7'
+            label: Text
+            name: 7b1f0af7
+            widget: string
+          - hint: 'Original text: maioria., key: -64fee2'
+            label: Text
+            name: '-64fee2'
+            widget: string
+          - hint: 'Original text: Dr. Eugênio, key: 5b1e021'
+            label: Text
+            name: 5b1e021
+            widget: string
+          - hint: 'Original text: @dr_eugeniofrancisco, key: 2ee05beb'
+            label: Text
+            name: 2ee05beb
+            widget: string
+          - hint: 'Original text: @azul_odontologia, key: -31f8b822'
+            label: Text
+            name: '-31f8b822'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: i5c2e367e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6fd0d76d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i33efb915
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i453b3e73
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i2900a65a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6acff2b1
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4d9d0508'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 176f5d2e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2acbeac1
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 442112d4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 183bbe44
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1458e85a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6d45cbe0'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5035a6fb'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '37411721'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 38f5efc0
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 13bc6fd2
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6708aeae
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2abdd340
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 460ba67a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
